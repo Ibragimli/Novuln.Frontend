@@ -9,33 +9,33 @@ import {
 import { useAlertStore } from '../store/alertStore'
 
 const MOCK_ALERTS = [
-  { id: 1, severity: 'Critical', title: 'RDP brute-force cəhdi',          time: '14:32', detail: 'IP: 185.220.101.45 — 47 uğursuz giriş cəhdi' },
-  { id: 2, severity: 'High',     title: 'Yeni CVE aşkarlandı',            time: '14:28', detail: 'CVE-2024-3094 — CVSS 9.8, sisteminizdə mövcuddur' },
-  { id: 3, severity: 'High',     title: 'SSL sertifikat 7 gün içindədir', time: '14:15', detail: 'mail.company.com sertifikatı 7 gündə bitir' },
-  { id: 4, severity: 'Medium',   title: 'Anomal trafik aşkarlandı',       time: '13:55', detail: 'Daxili şəbəkədə qeyri-adi port scan fəaliyyəti' },
-  { id: 5, severity: 'Critical', title: 'Admin hesabı breach-də tapıldı', time: '13:40', detail: 'admin@company.com HaveIBeenPwned-də mövcuddur' },
-  { id: 6, severity: 'Medium',   title: 'Firewall rule dəyişikliyi',      time: '13:20', detail: 'Port 8080 xaricə açıldı — avtomatik aşkarlandı' },
+  { id: 1, severity: 'Critical', title: 'RDP Brute-Force Attempt', time: '14:32', detail: 'IP: 185.220.101.45 — 47 failed login attempts detected' },
+  { id: 2, severity: 'High', title: 'New CVE Detected', time: '14:28', detail: 'CVE-2024-3094 — CVSS 9.8, present in your system' },
+  { id: 3, severity: 'High', title: 'SSL Certificate Expiring Soon', time: '14:15', detail: 'mail.company.com certificate expires in 7 days' },
+  { id: 4, severity: 'Medium', title: 'Anomalous Traffic Detected', time: '13:55', detail: 'Unusual port scan activity on internal network' },
+  { id: 5, severity: 'Critical', title: 'Admin Account Found in Breach', time: '13:40', detail: 'admin@company.com found on HaveIBeenPwned' },
+  { id: 6, severity: 'Medium', title: 'Firewall Rule Changed', time: '13:20', detail: 'Port 8080 opened to external — auto-detected' },
 ]
 
 const SEVERITY_COLOR = {
   Critical: '#ff4d4f',
-  High:     '#fa8c16',
-  Medium:   '#fadb14',
-  Low:      '#52c41a',
+  High: '#fa8c16',
+  Medium: '#fadb14',
+  Low: '#52c41a',
 }
 
 const SEVERITY_BG = {
   Critical: '#1a0000',
-  High:     '#1a0d00',
-  Medium:   '#1a1800',
-  Low:      '#001a00',
+  High: '#1a0d00',
+  Medium: '#1a1800',
+  Low: '#001a00',
 }
 
 const SEVERITY_ICON = {
   Critical: <FireOutlined />,
-  High:     <WarningOutlined />,
-  Medium:   <InfoCircleOutlined />,
-  Low:      <InfoCircleOutlined />,
+  High: <WarningOutlined />,
+  Medium: <InfoCircleOutlined />,
+  Low: <InfoCircleOutlined />,
 }
 
 // ── Alert Card ─────────────────────────────────────────────
@@ -48,13 +48,13 @@ function AlertCard({ alert, onAcknowledge, acknowledged }) {
       exit={{ opacity: 0, height: 0, marginBottom: 0, padding: 0 }}
       transition={{ type: 'spring', stiffness: 300, damping: 28 }}
       style={{
-        background:   acknowledged ? '#111' : SEVERITY_BG[alert.severity],
+        background: acknowledged ? '#111' : SEVERITY_BG[alert.severity],
         borderRadius: 10,
-        padding:      '12px 14px',
+        padding: '12px 14px',
         marginBottom: 8,
-        border:       `1px solid ${SEVERITY_COLOR[alert.severity]}${acknowledged ? '22' : '44'}`,
-        borderLeft:   `3px solid ${SEVERITY_COLOR[alert.severity]}`,
-        position:     'relative',
+        border: `1px solid ${SEVERITY_COLOR[alert.severity]}${acknowledged ? '22' : '44'}`,
+        borderLeft: `3px solid ${SEVERITY_COLOR[alert.severity]}`,
+        position: 'relative',
       }}
     >
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 8 }}>
@@ -65,10 +65,10 @@ function AlertCard({ alert, onAcknowledge, acknowledged }) {
               {SEVERITY_ICON[alert.severity]}
             </span>
             <span style={{
-              color:      acknowledged ? '#666' : '#fff',
-              fontSize:   13,
+              color: acknowledged ? '#666' : '#fff',
+              fontSize: 13,
               fontWeight: 600,
-              overflow:   'hidden',
+              overflow: 'hidden',
               textOverflow: 'ellipsis',
               whiteSpace: 'nowrap',
             }}>
@@ -78,8 +78,8 @@ function AlertCard({ alert, onAcknowledge, acknowledged }) {
 
           {/* Detail */}
           <div style={{
-            color:      '#777',
-            fontSize:   11,
+            color: '#777',
+            fontSize: 11,
             lineHeight: 1.5,
             marginBottom: 8,
           }}>
@@ -89,20 +89,19 @@ function AlertCard({ alert, onAcknowledge, acknowledged }) {
           {/* Footer */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
             <span style={{
-              background:   `${SEVERITY_COLOR[alert.severity]}22`,
-              border:       `1px solid ${SEVERITY_COLOR[alert.severity]}55`,
-              color:        SEVERITY_COLOR[alert.severity],
-              fontSize:     10,
-              fontWeight:   700,
-              padding:      '1px 7px',
+              background: `${SEVERITY_COLOR[alert.severity]}22`,
+              border: `1px solid ${SEVERITY_COLOR[alert.severity]}55`,
+              color: SEVERITY_COLOR[alert.severity],
+              fontSize: 10,
+              fontWeight: 700,
+              padding: '1px 7px',
               borderRadius: 10,
             }}>
               {alert.severity}
             </span>
             <span style={{ color: '#444', fontSize: 11 }}>{alert.time}</span>
-            {acknowledged && (
-              <span style={{ color: '#52c41a', fontSize: 10, marginLeft: 'auto' }}>✓ Oxundu</span>
-            )}
+            {acknowledged && <span style={{ color: '#52c41a', fontSize: 10, marginLeft: 'auto' }}>✓ Read</span>}
+
           </div>
         </div>
 
@@ -114,17 +113,17 @@ function AlertCard({ alert, onAcknowledge, acknowledged }) {
             onClick={() => onAcknowledge(alert.id)}
             title="Oxundu kimi işarələ"
             style={{
-              width:        28, height: 28,
+              width: 28, height: 28,
               borderRadius: '50%',
-              background:   'transparent',
-              border:       '1px solid #52c41a44',
-              color:        '#52c41a',
-              cursor:       'pointer',
-              display:      'flex',
-              alignItems:   'center',
+              background: 'transparent',
+              border: '1px solid #52c41a44',
+              color: '#52c41a',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
               justifyContent: 'center',
-              fontSize:     12,
-              flexShrink:   0,
+              fontSize: 12,
+              flexShrink: 0,
             }}
           >
             <CheckOutlined />
@@ -137,9 +136,9 @@ function AlertCard({ alert, onAcknowledge, acknowledged }) {
 
 // ── Main ───────────────────────────────────────────────────
 export default function AlertSidebar() {
-  const [open,           setOpen]          = useState(false)
-  const [activeFilter,   setActiveFilter]  = useState('all')
-  const [initialized,    setInitialized]   = useState(false)
+  const [open, setOpen] = useState(false)
+  const [activeFilter, setActiveFilter] = useState('all')
+  const [initialized, setInitialized] = useState(false)
 
   const { alerts, unreadCount, acknowledgedIds, addAlert, acknowledge } = useAlertStore()
 
@@ -154,13 +153,13 @@ export default function AlertSidebar() {
   }, [])
 
   const unacknowledged = alerts.filter(a => !acknowledgedIds.includes(a.id))
-  const acknowledged   = alerts.filter(a =>  acknowledgedIds.includes(a.id))
+  const acknowledged = alerts.filter(a => acknowledgedIds.includes(a.id))
 
   const filterCounts = {
-    all:      alerts.length,
+    all: alerts.length,
     Critical: alerts.filter(a => a.severity === 'Critical').length,
-    High:     alerts.filter(a => a.severity === 'High').length,
-    Medium:   alerts.filter(a => a.severity === 'Medium').length,
+    High: alerts.filter(a => a.severity === 'High').length,
+    Medium: alerts.filter(a => a.severity === 'Medium').length,
   }
 
   function filteredUnack() {
@@ -181,10 +180,10 @@ export default function AlertSidebar() {
             transition={{ duration: 0.15 }}
             style={{
               position: 'fixed',
-              top:      12,
-              right:    16,
-              zIndex:   1000,
-              cursor:   'pointer',
+              top: 12,
+              right: 16,
+              zIndex: 1000,
+              cursor: 'pointer',
             }}
             whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.93 }}
@@ -195,16 +194,16 @@ export default function AlertSidebar() {
               styles={{ indicator: { background: '#ff4d4f', boxShadow: '0 0 6px #ff4d4f' } }}
             >
               <div style={{
-                width:          40,
-                height:         40,
-                borderRadius:   '50%',
-                background:     '#1a1a1a',
-                border:         `2px solid ${unreadCount > 0 ? '#ff4d4f66' : '#2a2a2a'}`,
-                display:        'flex',
-                alignItems:     'center',
+                width: 40,
+                height: 40,
+                borderRadius: '50%',
+                background: '#1a1a1a',
+                border: `2px solid ${unreadCount > 0 ? '#ff4d4f66' : '#2a2a2a'}`,
+                display: 'flex',
+                alignItems: 'center',
                 justifyContent: 'center',
-                boxShadow:      unreadCount > 0 ? '0 0 10px rgba(255,77,79,0.3)' : 'none',
-                transition:     'all 0.2s',
+                boxShadow: unreadCount > 0 ? '0 0 10px rgba(255,77,79,0.3)' : 'none',
+                transition: 'all 0.2s',
               }}>
                 <BellOutlined style={{ color: '#fff', fontSize: 16 }} />
               </div>
@@ -225,9 +224,9 @@ export default function AlertSidebar() {
               exit={{ opacity: 0 }}
               onClick={() => setOpen(false)}
               style={{
-                position:   'fixed', inset: 0,
+                position: 'fixed', inset: 0,
                 background: 'rgba(0,0,0,0.45)',
-                zIndex:     998,
+                zIndex: 998,
               }}
             />
 
@@ -235,29 +234,29 @@ export default function AlertSidebar() {
             <motion.div
               key="panel"
               initial={{ x: 420, opacity: 0 }}
-              animate={{ x: 0,   opacity: 1 }}
-              exit={{ x: 420,    opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: 420, opacity: 0 }}
               transition={{ type: 'spring', stiffness: 300, damping: 32 }}
               style={{
-                position:      'fixed',
-                top:           0, right: 0, bottom: 0,
-                width:         Math.min(400, window.innerWidth - 8),
-                background:    '#0f0f0f',
-                borderLeft:    '1px solid #1f1f1f',
-                zIndex:        999,
-                display:       'flex',
+                position: 'fixed',
+                top: 0, right: 0, bottom: 0,
+                width: Math.min(400, window.innerWidth - 8),
+                background: '#0f0f0f',
+                borderLeft: '1px solid #1f1f1f',
+                zIndex: 999,
+                display: 'flex',
                 flexDirection: 'column',
               }}
             >
               {/* ── Header ── */}
               <div style={{
-                padding:        '16px 18px',
-                borderBottom:   '1px solid #1f1f1f',
-                display:        'flex',
-                alignItems:     'center',
+                padding: '16px 18px',
+                borderBottom: '1px solid #1f1f1f',
+                display: 'flex',
+                alignItems: 'center',
                 justifyContent: 'space-between',
-                flexShrink:     0,
-                background:     '#141414',
+                flexShrink: 0,
+                background: '#141414',
               }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                   <div style={{
@@ -268,12 +267,9 @@ export default function AlertSidebar() {
                     <BellOutlined style={{ color: '#ff4d4f', fontSize: 14 }} />
                   </div>
                   <div>
-                    <div style={{ color: '#fff', fontWeight: 700, fontSize: 15 }}>Alertlər</div>
+                    <div style={{ color: '#fff', fontWeight: 700, fontSize: 15 }}>Alerts</div>
                     <div style={{ color: '#666', fontSize: 11 }}>
-                      {unreadCount > 0
-                        ? `${unreadCount} oxunmamış`
-                        : 'Hamısı oxundu'
-                      }
+                      {unreadCount > 0 ? `${unreadCount} unread` : 'All caught up'}
                     </div>
                   </div>
                 </div>
@@ -285,7 +281,7 @@ export default function AlertSidebar() {
                       style={{ color: '#52c41a', fontSize: 12 }}
                       onClick={() => unacknowledged.forEach(a => acknowledge(a.id))}
                     >
-                      Hamısını oxu
+                      Mark all read
                     </Button>
                   )}
                   <motion.div
@@ -306,40 +302,40 @@ export default function AlertSidebar() {
 
               {/* ── Filter tabs ── */}
               <div style={{
-                padding:      '10px 16px',
+                padding: '10px 16px',
                 borderBottom: '1px solid #1f1f1f',
-                display:      'flex',
-                gap:          6,
-                flexWrap:     'wrap',
-                flexShrink:   0,
+                display: 'flex',
+                gap: 6,
+                flexWrap: 'wrap',
+                flexShrink: 0,
               }}>
                 {[
-                  { key: 'all',      label: 'Hamısı',  color: '#888'    },
-                  { key: 'Critical', label: 'Kritik',  color: '#ff4d4f' },
-                  { key: 'High',     label: 'Yüksək',  color: '#fa8c16' },
-                  { key: 'Medium',   label: 'Orta',    color: '#fadb14' },
+                  { key: 'all', label: 'All', color: '#888' },
+                  { key: 'Critical', label: 'Critical', color: '#ff4d4f' },
+                  { key: 'High', label: 'High', color: '#fa8c16' },
+                  { key: 'Medium', label: 'Medium', color: '#fadb14' },
                 ].map(f => (
                   <motion.div
                     key={f.key}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => setActiveFilter(f.key)}
                     style={{
-                      padding:      '4px 10px',
+                      padding: '4px 10px',
                       borderRadius: 20,
-                      cursor:       'pointer',
-                      fontSize:     11,
-                      fontWeight:   600,
-                      background:   activeFilter === f.key ? `${f.color}22` : 'transparent',
-                      border:       `1px solid ${activeFilter === f.key ? f.color + '66' : '#2a2a2a'}`,
-                      color:        activeFilter === f.key ? f.color : '#666',
-                      transition:   'all 0.15s',
+                      cursor: 'pointer',
+                      fontSize: 11,
+                      fontWeight: 600,
+                      background: activeFilter === f.key ? `${f.color}22` : 'transparent',
+                      border: `1px solid ${activeFilter === f.key ? f.color + '66' : '#2a2a2a'}`,
+                      color: activeFilter === f.key ? f.color : '#666',
+                      transition: 'all 0.15s',
                     }}
                   >
                     {f.label}
                     <span style={{
                       marginLeft: 5,
                       background: activeFilter === f.key ? f.color : '#2a2a2a',
-                      color:      activeFilter === f.key ? '#fff' : '#555',
+                      color: activeFilter === f.key ? '#fff' : '#555',
                       borderRadius: 10,
                       padding: '0 5px',
                       fontSize: 10,
@@ -356,9 +352,9 @@ export default function AlertSidebar() {
                 {alerts.length === 0 && (
                   <div style={{ textAlign: 'center', color: '#444', marginTop: 60 }}>
                     <BellOutlined style={{ fontSize: 36, marginBottom: 12, display: 'block' }} />
-                    <div style={{ fontSize: 13 }}>Alert yoxdur</div>
+                    <div style={{ fontSize: 13 }}>No alerts</div>
                     <div style={{ fontSize: 11, marginTop: 4, color: '#333' }}>
-                      Real-time monitoring aktiv
+                      Real-time monitoring active
                     </div>
                   </div>
                 )}
@@ -406,10 +402,10 @@ export default function AlertSidebar() {
 
               {/* ── Footer ── */}
               <div style={{
-                padding:    '12px 16px',
-                borderTop:  '1px solid #1f1f1f',
+                padding: '12px 16px',
+                borderTop: '1px solid #1f1f1f',
                 flexShrink: 0,
-                display:    'flex',
+                display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 gap: 6,
@@ -419,7 +415,7 @@ export default function AlertSidebar() {
                   background: '#52c41a',
                   boxShadow: '0 0 6px #52c41a',
                 }} />
-                <div style={{ color: '#444', fontSize: 11 }}>Real-time monitoring aktiv</div>
+                <div style={{ color: '#444', fontSize: 11 }}>Real-time monitoring active</div>
               </div>
             </motion.div>
           </>
